@@ -15,69 +15,14 @@
             Resources
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/bookmarks" class="dropdown-item">
-              Bookmarks
-            </a>
             <a href="/dishes" class="dropdown-item">
               Dishes
             </a>
-            <a href="/cuisines" class="dropdown-item">
-              Cuisines
-            </a>
-            <a href="/neighborhoods" class="dropdown-item">
-              Neighborhoods
-            </a>
+
             <a href="/venues" class="dropdown-item">
               Venues
             </a>
-            <a href="/users" class="dropdown-item">
-              Users
-            </a>
-            <a href="/batch_action_admin_bookmarks" class="dropdown-item">
-              Batch Action Admin Bookmarks
-            </a>
-            <a href="/admin_bookmarks" class="dropdown-item">
-              Admin Bookmarks
-            </a>
-            <a href="/batch_action_admin_cuisines" class="dropdown-item">
-              Batch Action Admin Cuisines
-            </a>
-            <a href="/admin_cuisines" class="dropdown-item">
-              Admin Cuisines
-            </a>
-            <a href="/batch_action_admin_users" class="dropdown-item">
-              Batch Action Admin Users
-            </a>
-            <a href="/admin_users" class="dropdown-item">
-              Admin Users
-            </a>
-            <a href="/batch_action_admin_dishes" class="dropdown-item">
-              Batch Action Admin Dishes
-            </a>
-            <a href="/admin_dishes" class="dropdown-item">
-              Admin Dishes
-            </a>
-            <a href="/batch_action_admin_neighborhoods" class="dropdown-item">
-              Batch Action Admin Neighborhoods
-            </a>
-            <a href="/admin_neighborhoods" class="dropdown-item">
-              Admin Neighborhoods
-            </a>
-            <a href="/batch_action_admin_admin_users" class="dropdown-item">
-              Batch Action Admin Admin Users
-            </a>
-            <a href="/admin_admin_users" class="dropdown-item">
-              Admin Admin Users
-            </a>
-            <a href="/batch_action_admin_venues" class="dropdown-item">
-              Batch Action Admin Venues
-            </a>
-            <a href="/admin_venues" class="dropdown-item">
-              Admin Venues
-            </a>
-            <a href="/admin_admin_comments" class="dropdown-item">
-              Admin Admin Comments
-            </a>
+            
           </div>
         </li>
       </ul>
@@ -97,7 +42,7 @@
         <% else %>
           <li class="nav-item">
             <a href="/users/edit" class="nav-link">
-              Edit profile
+              <%= current_user.username %>
             </a>
           </li>
 
