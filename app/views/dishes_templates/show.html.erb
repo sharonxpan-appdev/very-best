@@ -1,5 +1,14 @@
-<div class="page-header">
-  <h3>Dish #<%= @dish.id %></h3>
+<div class="card container mt-4">
+  <div class = "card-header"><h4>You loved the <%= @dish.name %> at... </h4>
+    <a class="badge badge-primary text-white">
+    <% if @dish.cuisine.present? %>
+          <%= @dish.cuisine.name %>
+    <% end %>
+  </a>
+  </div>
+
+
+
 </div>
 
 <div class="row">

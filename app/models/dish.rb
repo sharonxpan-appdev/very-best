@@ -7,6 +7,7 @@ class Dish < ApplicationRecord
   belongs_to :cuisine,
              :counter_cache => true
 
+
   # Indirect associations
 
   has_many   :specialists,
