@@ -30,6 +30,7 @@
                         </button>
                       </div>
                     </form>
+
                 </dd>
                     <dd class="font-weight-normal">
 
@@ -40,15 +41,26 @@
                               <%= venue.name %>
                             </a>
                               <td>
-                      <%= time_ago_in_words(venue.created_at) %> ago
-        
+                        <small class ="float-right text-muted">
+                          <%= time_ago_in_words(venue.created_at) %> ago
+                            <a href="/bookmarks/<%= @dish.bookmarks.find_by(user_id: current_user.id).id %>/edit">
+                              <i class="fa fa-pencil-
+                              square-o" aria-hidden="true"></i>
+                            </a>
+                            <a href="/delete_bookmark/<%= @dish.bookmarks.find_by(user_id: current_user.id).id %>" rel="nofollow">
+                              <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </a>
+
+                        </small>
                       <% end %>
                       
                     </dd>
       
                
-                </div>
-          </div>
+            </div>
+          
+            
+        </div>
         <div class = "card-footer">
 
 
