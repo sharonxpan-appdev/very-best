@@ -94,24 +94,29 @@
                     <%= dish.name %></td>
                   </a>
                 <td>
-                  <!--<% if dish.cuisine.present? %>-->
-                  <!--    <%= dish.cuisine.name %>-->
-                  <!--<% end %>-->
                  
                 <% if dish.bookmarks.find_by(user_id: current_user.id).present? %>
                   <% venue = dish.bookmarks.find_by(user_id: current_user.id).venue %>
-                    <li class="list-group-item">
+
                       <a href="/venues/<%= venue.id %>">
                         <%= venue.name %>
                       </a>
-                    </li>
-
+                <% else %>
+                  <form action="/create_bookmark" method = "post">
+                    <div class="form-group">
+                      <%= select_tag("venue_id", options_from_collection_for_select(Venue.all, :id, :name, @bookmark.try(:venue_id)), :class => "form-control") %>
+                      
+                      <input type = "hidden" name = "dish_id" value ="<%=dish.id%>">
+                      <input type = "hidden" name = "user_id" value ="<%=current_user.id%>">
+                      <input type = "hidden" name = "notes" value = "">
+                      <button class = "btn btn-primary btn-sm">
+                        <i class = "fa fa-heart"> </i>
+                      </button>
+                    </div>
+                  </form>
                 <% end %>
                   
-                  <a href = "/bookmarks/new"><button class = "btn btn-primary btn-sm">
-                    <i class = "fa fa-heart"> </i>
-                  </button>
-                  <a></a>
+
                 </td>
                 <td class = "text-right">
                   <a class="badge badge-primary text-white">
