@@ -35,23 +35,27 @@
                     <dd class="font-weight-normal">
 
                       <% if @dish.bookmarks.find_by(user_id: current_user.id).present? %>
-                        <% venue = @dish.bookmarks.find_by(user_id: current_user.id).venue %>
-      
-                            <a href="/venues/<%= venue.id %>">
-                              <%= venue.name %>
-                            </a>
-                              <td>
-                        <small class ="float-right text-muted">
-                          <%= time_ago_in_words(venue.created_at) %> ago
-                            <a href="/bookmarks/<%= @dish.bookmarks.find_by(user_id: current_user.id).id %>/edit">
-                              <i class="fa fa-pencil-
-                              square-o" aria-hidden="true"></i>
-                            </a>
-                            <a href="/delete_bookmark/<%= @dish.bookmarks.find_by(user_id: current_user.id).id %>" rel="nofollow">
-                              <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </a>
-
-                        </small>
+                        <% @dish.bookmarks.where(user_id: current_user.id).each do |bookmark| %>
+                          <ul class = "list-group list-group-flush">
+                            <li class = "list-group-item">
+                              <p>
+                              <a href="/venues/<%= bookmark.venue.id %>">
+                                <%= bookmark.venue.name %>
+                              </a>
+                                    
+                              <small class ="float-right text-muted">
+                                <%= time_ago_in_words(bookmark.venue.created_at) %> ago
+                                  <a href="/bookmarks/<%= @dish.bookmarks.find_by(user_id: current_user.id).id %>/edit">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                  </a>
+                                  <a href="/delete_bookmark/<%= @dish.bookmarks.find_by(user_id: current_user.id).id %>" rel="nofollow">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                  </a>
+                              </small>
+                            </p>
+                              </li>  
+                            </ul>
+                        <% end %>
                       <% end %>
                       
                     </dd>
