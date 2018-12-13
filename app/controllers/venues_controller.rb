@@ -30,8 +30,20 @@ class VenuesController < ApplicationController
     @venue = Venue.new
 
     @venue.name = params.fetch("name")
-    @venue.address = params.fetch("address")
     @venue.neighborhood_id = params.fetch("neighborhood_id")
+
+    sanitized_street_address = URI.encode(params.fetch("address"))
+    
+    #API Keys
+    
+    url = ("https://maps.googleapis.com/maps/api/geocode/json?address=" + sanitized_street_address + "&key=AIzaSyA5qwIlcKjijP_Ptmv46mk4cCjuWhSzS78")
+    parsed_data = JSON.parse(open(url).read)
+
+    @latitude = parsed_data.dig("results", 0, "geometry", "location", "lat")
+    @longitude = parsed_data.dig("results", 0, "geometry", "location", "lng")
+
+    @venue.address = parsed_data.dig("results", 0, "formatted_address")
+
 
     save_status = @venue.save
 
@@ -40,7 +52,7 @@ class VenuesController < ApplicationController
 
       case referer
       when "/venues/new", "/create_venue"
-        redirect_to("/venues")
+        redirect_to("/dishes")
       else
         redirect_back(:fallback_location => "/", :notice => "Venue created successfully.")
       end
