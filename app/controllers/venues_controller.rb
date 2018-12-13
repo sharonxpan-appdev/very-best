@@ -31,18 +31,17 @@ class VenuesController < ApplicationController
 
     @venue.name = params.fetch("name")
     @venue.neighborhood_id = params.fetch("neighborhood_id")
-
-    sanitized_street_address = URI.encode(params.fetch("address"))
     
     #API Keys
     
-    url = ("https://maps.googleapis.com/maps/api/geocode/json?address=" + sanitized_street_address + "&key=AIzaSyA5qwIlcKjijP_Ptmv46mk4cCjuWhSzS78")
+    sanitized_street_address = URI.encode(params.fetch("address"))
+    url = "https://maps.googleapis.com/maps/api/geocode/json?address="+sanitized_street_address+"&key=AIzaSyA5qwIlcKjijP_Ptmv46mk4cCjuWhSzS78"
     parsed_data = JSON.parse(open(url).read)
 
-    @latitude = parsed_data.dig("results", 0, "geometry", "location", "lat")
-    @longitude = parsed_data.dig("results", 0, "geometry", "location", "lng")
+    @venue.address_latitude = parsed_data.dig("results", 0, "geometry","location", "lat")
+    @venue.address_longitude = parsed_data.dig("results", 0, "geometry","location", "lng")
 
-    @venue.address = parsed_data.dig("results", 0, "formatted_address")
+    @venue.address = parsed_data["results"][0]["formatted_address"]
 
 
     save_status = @venue.save

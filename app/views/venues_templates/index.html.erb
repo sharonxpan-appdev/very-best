@@ -36,18 +36,22 @@
       <div id="location_map" style="height: 480px;">
       </div>
 
-      <% current_user.bookmarked_venues.each do |venue| %>
+      <% @venues.each do |venue| %>
       <ul class = "list-group list-group-flush">
-        <li class = "list-group-item">
-          <a href="/venues/<%= venue.id %>">
-            <%= venue.name %>
-          </a>
-          <small class ="float-right text-muted">
-          <% if venue.neighborhood.present? %>
-              <%= venue.neighborhood.name %>
+
+          <% if Bookmark.find_by(venue_id: venue.id, user_id: current_user.id).present? %>
+            <li class = "list-group-item">
+              <a href="/venues/<%= venue.id %>">
+                <%= venue.name %>
+              </a>
+              <small class ="float-right text-muted">
+              <% if venue.neighborhood.present? %>
+                  <%= venue.neighborhood.name %>
+              <% end %>
+              </small>
+            </li>
           <% end %>
-          </small>
-        </li>
+
         <!--<td>-->
         <!--  <a href="/venues/<%= venue.id %>" class="btn btn-primary">Show</a>-->
         <!--  <a href="/venues/<%= venue.id %>/edit" class="btn btn-warning">Edit</a>-->
